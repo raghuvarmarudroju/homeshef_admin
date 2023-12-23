@@ -1,0 +1,16 @@
+<div class="file-upload mb-2">  
+    <input *ngIf="!files.length" id="singleFileUploader" type="file" [accept]="acceptTypes" (change)="fileChange(input)" #input/> 
+    <span >
+        <mat-form-field appearance="outline" class="w-100"  *ngIf="!files.length">
+            <input matInput  (click)="fileUploadClick()" placeholder="Choose Excel file">
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="w-100"  *ngIf="files.length">
+            <span style="display: flex;">
+                <input matInput [placeholder]="'files[0].name'" readonly>
+                <button mat-icon-button color="warn" (click)="deleteFile()" matTooltip="Remove">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </span>
+        </mat-form-field>
+    </span>
+</div> 

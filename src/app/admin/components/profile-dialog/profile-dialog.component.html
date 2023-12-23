@@ -1,0 +1,115 @@
+<div class="header bg-primary">
+    <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+        <h2 class="fw-500 secondary-font">Edit Profile</h2>
+        <app-dialog-header-controls [dialogRef]="dialogRef"></app-dialog-header-controls> 
+    </div>   
+</div>  
+<form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
+    <div mat-dialog-content> 
+        <mat-tab-group class="tab-content-wrapped">
+            <mat-tab label="General Info">
+                <div fxLayout="row wrap" class="mt-2">
+                    <div fxFlex="15" fxFlex.gt.sm="15">
+                        <app-image-upload [base64]="form.controls.avatar.value" [fileTouched]="fileTouched"
+                        [fileSize]="400"    
+                        [acceptTypes]="'image/png, image/jpeg, image/jpg'"
+                        (onFileChange)="fileChange($event)">
+                        </app-image-upload>
+                    </div>
+                    <div fxFlex="85" fxFlex.gt.sm="85">
+                        <div fxLayout="row wrap" class="mt-2">
+                            <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-3">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>Name</mat-label>
+                                    <input matInput placeholder="Name" formControlName="name" required>
+                                    <mat-error *ngIf="form.controls.name.errors?.required">Name is required</mat-error>   
+                                </mat-form-field>
+                            </div>
+                            <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-3">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>Email</mat-label>
+                                    <input matInput placeholder="Email" formControlName="email">
+                                </mat-form-field>
+                            </div>
+                            <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-3">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>Mobile</mat-label>
+                                    <input matInput placeholder="Mobile Number" formControlName="number"> 
+                                    <mat-error *ngIf="form.controls.number.errors?.required">Mobile number is required</mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-3">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>Address</mat-label>
+                                    <input matInput placeholder="Address" formControlName="address" #search autocorrect="off" autocapitalize="off" spellcheck="off"> 
+                                    <mat-error *ngIf="form.controls.address.errors?.required">Address is required</mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-3">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>Landmark</mat-label>
+                                    <input matInput placeholder="Landmark" formControlName="landmark"> 
+                                    <mat-error *ngIf="form.controls.landmark.errors?.required">Landmark is required</mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-3">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>House/Flat NO.</mat-label>
+                                    <input matInput placeholder="House/Flat NO." formControlName="house"> 
+                                    <mat-error *ngIf="form.controls.house.errors?.required">House/Flat NO. is required</mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-3">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>City</mat-label>
+                                    <input matInput placeholder="City" formControlName="city"> 
+                                    <mat-error *ngIf="form.controls.city.errors?.required">City is required</mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+  
+            </mat-tab>
+            <!--
+            <mat-tab label="Address" formGroupName="address">
+                <div fxLayout="row wrap" class="mt-2">  
+                    <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-3">
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>City</mat-label>
+                            <input matInput placeholder="City" formControlName="city" required>
+                            <mat-error *ngIf="form.get('address.city')!.errors?.required">City is required</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div fxFlex="100" fxFlex.gt-sm="33.3" class="px-3">
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>Zip/Postal Code</mat-label>
+                            <input matInput placeholder="Zip/Postal Code" formControlName="zip" required>
+                            <mat-error *ngIf="form.get('address.zip')!.errors?.required">Zip/Postal Code is required</mat-error>
+                        </mat-form-field>
+                      </div>                  
+                    <div fxFlex="100" class="px-3">
+                        <mat-form-field appearance="outline" class="w-100">
+                            <mat-label>Address</mat-label>
+                            <input matInput placeholder="Address (street, apartment, suite, unit etc.)" formControlName="address" required>
+                            <mat-error *ngIf="form.get('address.address')!.errors?.required">Address is required</mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </mat-tab>
+            -->
+        </mat-tab-group> 
+        <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom" (centerChange)="centerChanged($event)" (mapReady)="mapReady($event)">
+            <agm-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]="true" (dragEnd)="markerDragEnd($event)"
+              ></agm-marker>
+          </agm-map>
+    </div>
+    <div mat-dialog-actions>
+        <div fxLayout="row" fxLayoutAlign="space-between center" class="w-100 px-1"> 
+            <button mat-raised-button color="warn" type="button" mat-dialog-close>Close</button>
+            <button mat-raised-button color="primary" type="submit">Save</button>
+        </div> 
+    </div>
+</form>
+ 

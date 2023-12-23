@@ -1,0 +1,20 @@
+.mat-form-field-appearance-outline .mat-form-field-infix {
+    padding: 5px 0 5px 0 !important;
+}
+.filter-form{
+    padding: 5px;
+}
+.pd-5{
+    padding: 5px;
+}
+fieldset {
+    legend {
+      color: red
+    }
+    padding: 20px;
+    border: solid 1px red;
+  
+    .mat-form-field {
+      padding: 10px 0;
+    }
+  }

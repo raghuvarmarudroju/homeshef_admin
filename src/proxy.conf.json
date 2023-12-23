@@ -1,0 +1,7 @@
+{
+    "/api/*": {
+        "target": "https://beta.topchop.in/",
+        "secure": false,
+        "logLevel": "debug"
+    }
+}

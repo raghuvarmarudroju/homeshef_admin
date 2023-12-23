@@ -1,0 +1,9 @@
+.flex-demo {
+    height: 300px;
+}
+
+::ng-deep div.days-checkbox-container span.mat-checkbox-inner-container {
+    display: none;
+}
+
+agm-map { height: 500px; }

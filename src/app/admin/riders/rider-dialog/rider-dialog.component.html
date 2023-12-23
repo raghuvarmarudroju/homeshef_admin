@@ -1,0 +1,69 @@
+<h1 mat-dialog-title><span *ngIf="!rider.id">Add</span><span *ngIf="rider.id">Edit</span> user</h1>
+<form [formGroup]="form" class="user-form" (ngSubmit)="onRegisterFormSubmit()">
+    <div mat-dialog-content>      
+        <mat-tab-group class="vertical-tabs">
+            <mat-tab label="Basic" >
+                <div fxLayout="column" class="form-field-outer">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label><mat-icon>person</mat-icon> Name</mat-label>
+                        <input matInput formControlName="name" required>
+                        <mat-error *ngIf="form.controls.name.errors?.required">Name is required</mat-error>
+                        <mat-error *ngIf="form.controls.name.hasError('minlength')">Name isn't long enough, minimum of 5 characters</mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label><mat-icon>mail</mat-icon> Email</mat-label>
+                        <input matInput formControlName="email" required>
+                        <mat-error *ngIf="form.controls.email.errors?.required">Email is required</mat-error>
+                        
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Mobile</mat-label>
+                        <input matInput placeholder="Mobile Number" formControlName="number"> 
+                        <mat-error *ngIf="form.controls.number.errors?.required">Mobile number is required</mat-error>
+                    </mat-form-field>
+                    <!-- <mat-form-field appearance="outline" class="w-100">
+                        <mat-label><mat-icon>vpn_key</mat-icon> Password</mat-label>
+                        <input matInput formControlName="password" required [type]="passwordHide ? 'password' : 'text'">
+                        <mat-icon matSuffix (click)="passwordHide = !passwordHide">{{passwordHide ? 'visibility' : 'visibility_off'}}</mat-icon>
+                        <mat-error *ngIf="form.controls.password.errors?.required">Password is required</mat-error>
+                        <mat-error *ngIf="form.controls.password.hasError('minlength')">Password isn't long enough, minimum of 6 characters</mat-error>
+                    </mat-form-field>
+                    <mat-form-field  appearance="outline" class="w-100">
+                        <mat-icon matPrefix class="mr-1 text-muted">lock</mat-icon>
+                        <mat-label>Confirm Password</mat-label>
+                        <input matInput placeholder="Confirm Password" formControlName="confirmPassword" type="password" required [type]="hide ? 'password' : 'text'">
+                        <mat-error *ngIf="form.controls.confirmPassword.errors?.required">Confirm Password is required</mat-error>
+                        <mat-error *ngIf="form.controls.confirmPassword.hasError('mismatchedPasswords')">Passwords do not match</mat-error>
+                        <button mat-icon-button matSuffix (click)="hide = !hide" type="button" class="text-muted">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        </button>
+                    </mat-form-field> -->
+                </div>
+            </mat-tab>
+            <mat-tab label="Bike Info" formGroupName="rider">
+                <div fxLayout="column" class="form-field-outer">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <input matInput placeholder="Driving License" formControlName="driving_license">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <input matInput placeholder="Bike Number" formControlName="bike_info">
+                    </mat-form-field>
+                </div>
+            </mat-tab>
+            <mat-tab label="Settings" formGroupName="settings">
+                <div fxLayout="column" class="form-field-outer">
+                    <mat-checkbox formControlName="is_active">Active</mat-checkbox>
+                    <mat-checkbox formControlName="is_verified">Verified</mat-checkbox>
+                    <p *ngIf="rider.id"><span>Registration date:</span> <i>{{rider.settings.registrationDate | date:"dd MMMM, yyyy 'at' HH:mm" }}</i></p> 
+                    <p *ngIf="rider.id"><span>Last joined date:</span> <i>{{rider.settings.joinedDate | date:"dd MMMM, yyyy 'at' HH:mm" }}</i> </p>     
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+    <div mat-dialog-actions style="box-sizing: border-box">
+        <div fxLayout="row" fxLayoutAlign="end center" class="w-100">
+            <button mat-raised-button color="primary"  type="submit" ><span *ngIf="!rider.id">Save</span><span *ngIf="rider.id">Update</span></button>
+            <button mat-raised-button color="warn" (click)="close()">Cancel</button>
+        </div> 
+    </div>
+</form>

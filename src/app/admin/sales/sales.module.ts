@@ -1,0 +1,30 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router'; 
+import { SharedModule } from '../../shared/shared.module'; 
+import { OrdersComponent } from './orders/orders.component';
+import { TransactionsComponent } from './transactions/transactions.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+
+export const routes = [ 
+  { path: '', redirectTo: 'orders', pathMatch: 'full'},
+  { path: 'orders', component: OrdersComponent, data: { breadcrumb: 'Orders' } },
+  { path: 'transactions', component: TransactionsComponent, data: { breadcrumb: 'Transactions' } } 
+];
+
+@NgModule({
+  declarations: [
+    OrdersComponent, 
+    TransactionsComponent
+  ],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes), 
+    SharedModule,
+    MatDatepickerModule,
+  ],
+  exports: [
+    MatDatepickerModule
+  ]
+})
+export class SalesModule { }

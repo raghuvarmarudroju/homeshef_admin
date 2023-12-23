@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+@import "app/theme/styles/spinner";
+@import "@angular/material/prebuilt-themes/indigo-pink.css"; 
+@import '~swiper/swiper-bundle.min.css';
+@import "app/theme/styles/base"; 
+@import "app/theme/styles/admin";
+@import "app/theme/styles/spaces";
+@import "app/theme/styles/theme";
+@import "app/theme/styles/gradients";
+@import "app/theme/styles/rtl"; 
+
+
+.mat-tab-label{
+    background: #00000012  !important;
+    border-radius: 10px;
+    color: #000 !important;
+    opacity: 1 !important;
+    margin: 5px 0px;
+}
+.mat-tab-label-active{
+    background: #c62828 !important;
+    color: #fff !important; 
+}
+.email-body {
+    .media-body{
+        text-align: center;
+        p{
+            text-align: center;
+        }
+    }
+    p{
+        font-size: 14px !important;
+        color: #000 !important;
+        margin: 8px 0 !important; 
+        text-align: left !important;
+        display: flex !important; 
+        justify-content: space-between !important;
+        span{
+            text-align: right !important;
+            display: inline-block !important;
+            float: right !important;
+        };
+    }
+    table {
+        grid-column: 2 / 3;
+        display: flex;
+        flex-direction: column;
+        margin: 5px 0px;
+        text-align: left;
+      }
+      
+      thead {
+        background-color: #f3f3f3;
+        border-radius: 8px 8px 0px 0px;
+      }
+      
+      thead > tr {
+        border-radius: 8px 8px 0px 0px;
+        font-weight: bold;
+        color: black;
+      }
+      
+      tr {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 8px;
+        border: 1px solid #e1e1e1;
+        margin-top: -1px;
+        color: #535353;
+      }
+      
+      tbody tr:hover {
+        background-color: #f6f6f6;
+      }
+}

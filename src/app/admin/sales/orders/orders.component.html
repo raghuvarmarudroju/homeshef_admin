@@ -1,0 +1,130 @@
+<form [formGroup]="form" (ngSubmit)="submit()" fxLayout="row wrap" class="filter-form" autocomplete="off">
+    <div fxFlex="100" fxFlex.gt-sm="20" class="px-2" ngClass.sm="mt-1" ngClass.xs="mt-1"> 
+        <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Coomunity</mat-label>
+            <mat-select formControlName="community" multiple> 
+                <mat-option *ngFor="let sat of communities" [value]="sat.id">{{sat.name}}</mat-option>
+            </mat-select>
+        </mat-form-field> 
+    </div>
+    <div fxFlex="100" fxFlex.gt-sm="20" class="px-2" ngClass.sm="mt-1" ngClass.xs="mt-1">
+        <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Date</mat-label>
+            <input matInput placeholder="Pick a date" formControlName="date" [matDatepicker]="datePicker" [min]="today" appMaskDate>
+            <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+            <mat-datepicker #datePicker></mat-datepicker>  
+        </mat-form-field> 
+    </div>
+    <div fxFlex="100" fxFlex.gt-sm="20" class="px-2" ngClass.sm="mt-1" ngClass.xs="mt-1"> 
+        <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Cook</mat-label>
+            <mat-select formControlName="chef" multiple> 
+                <mat-option *ngFor="let sat of chefs" [value]="sat.id">{{sat.name}}</mat-option>
+            </mat-select>
+        </mat-form-field> 
+    </div>
+    
+    <div fxFlex="100" fxFlex.gt-sm="20" class="px-2" ngClass.sm="mt-1" ngClass.xs="mt-1"> 
+        <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Rider</mat-label>
+            <mat-select formControlName="rider" multiple> 
+                <mat-option *ngFor="let sat of riders" [value]="sat.id">{{sat.name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>  
+    <div fxFlex="100" fxFlex.gt-sm="20" class="px-2" ngClass.sm="mt-1" ngClass.xs="mt-1">
+        <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Status</mat-label> 
+            <mat-select formControlName="status" multiple> 
+                <mat-option *ngFor="let sat of statuses" [value]="sat.id">{{sat.name}}</mat-option>
+            </mat-select>
+        </mat-form-field>  
+    </div>  
+    <div fxFlex="100" fxFlex.gt-sm="100" fxLayoutAlign="end end" class="px-2 pd-5" ngClass.sm="mt-1" ngClass.xs="mt-1">
+        <button mat-raised-button color="primary" type="submit" class="uppercase pd-5">Filter</button>
+        <button mat-raised-button color="primary" (click)="resetFilter()" type="reset" class="uppercase pd-5 mx-2">Reset</button>
+    </div>  
+</form>
+<mat-card class="m-2 p-0">
+    <div class="table-wrapper"> 
+        <table mat-table [dataSource]="dataSource" matSort class="w-100">      
+            <!-- ID Column -->
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+                <td mat-cell *matCellDef="let order"> #{{order.order_id}} </td>
+            </ng-container>  
+    
+            <!-- Date Column -->
+            <ng-container matColumnDef="date">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+                <td mat-cell *matCellDef="let order"> {{order.delivery_date | date :'MMMM d, y'}}</td>
+            </ng-container>  
+        
+            <!-- Rider Column -->
+            <ng-container matColumnDef="rider" >
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Rider </th>
+                <td mat-cell *matCellDef="let order">
+                    <span *ngIf="order.rider == null && appService.UserData.profile.role_id != 8">
+                        <mat-form-field appearance="outline" class="p-0 m-0">
+                            <mat-label>Assign Rider</mat-label>
+                            <mat-select (selectionChange)="assignRider($event, order)" [disabled]="order.status != 8">
+                                <mat-option *ngFor="let rider of riders" [value]="rider.id" >
+                                    {{rider.name}}
+                                </mat-option>
+                            </mat-select>  
+                        </mat-form-field>
+                    </span>
+                    <span *ngIf="order.rider != null || appService.UserData.profile.role_id == 8">
+                        {{order.rider ? order.rider.name : 'N/A'}}
+                    </span>
+                     
+                </td>
+            </ng-container> 
+
+            <!-- Status Column -->
+            <ng-container matColumnDef="status.name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header="status.name"> Status </th>
+                <td mat-cell *matCellDef="let order"> {{delivery_status[order.status].name}}</td>
+            </ng-container> 
+
+            <!-- Table Number Column -->
+            <ng-container matColumnDef="total">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Total </th>
+                <td mat-cell *matCellDef="let order"> ₹{{order.amount_to_be_paid}} for {{order.details.length}} items </td>
+            </ng-container> 
+
+            <!-- Action Column -->
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef> Action </th>
+                <td mat-cell *matCellDef="let order"> 
+                    <mat-form-field appearance="outline" class="p-0 m-0">
+                        <mat-label>Status</mat-label>
+                        <mat-select (selectionChange)="onStatusSelectionChange($event, order)" [disabled]="order.status == 5">
+                            <mat-option *ngFor="let status of statuses" [value]="status" [disabled]="checkStatus(order,status.id,status.roles)">
+                                {{status.name}}
+                            </mat-option>
+                        </mat-select>  
+                    </mat-form-field>  
+                </td>
+            </ng-container>
+    
+            <!-- View Column -->
+            <ng-container matColumnDef="view">
+                <th mat-header-cell *matHeaderCellDef> View </th>
+                <td mat-cell *matCellDef="let order"> 
+                    <button mat-icon-button color="primary" (click)="view(order)" matTooltip="View">
+                        <mat-icon>visibility</mat-icon>
+                    </button> 
+                    <button *ngIf="order.status == 0" mat-icon-button color="warn" (click)="receipt(order)" matTooltip="View Invoice">
+                        <mat-icon>receipt</mat-icon>
+                    </button> 
+                </td>
+            </ng-container> 
+        
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let order; columns: displayedColumns;"></tr>
+        </table> 
+        <p *ngIf="dataSource && dataSource.data.length === 0" class="py-5 mb-0 text-center">No data available</p> 
+    </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 50]"></mat-paginator>
+</mat-card>

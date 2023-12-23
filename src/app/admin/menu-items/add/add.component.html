@@ -1,0 +1,320 @@
+<div class="p-2">
+    <mat-card>  
+        <mat-card-content>
+            <form [formGroup]="formDemo" (ngSubmit)="onDemoSubmit()" autocomplete="off" fxLayout="row wrap">
+                <div fxFlex="50" fxFlex.gt="50" fxFlex.xs="100" fxFlex.sm="100" class="px-3">
+                    <div fxLayout="column wrap">
+                        <div fxFlex="100" fxFlex.gt-sm="100">
+                            <label><b>Name:</b></label>
+                            <br/>
+                            <span>Ex: Bone-In South Indian Chicken Curry</span>
+                            <br/>
+                            <span>(Please capitalize the first letter of each word)</span>
+                            <mat-form-field appearance="outline" class="w-100">
+                                <input matInput formControlName="name" required>
+                                <mat-error *ngIf="formDemo.controls.name.errors?.required">Name is required</mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div fxFlex="100" fxFlex.gt-sm="100">
+                            <label><b>Description</b></label>
+                            <br/>
+                            <span>Explain your dish and mention the following aspects:</span>
+                            <ul class="pl-4">
+                                <li>Top two flavors (examples: tangy, sweet, spicy, aromatic)</li>
+                                <li>Consistency (examples: juicy, crunchy, smooth, creamy, rich)</li>
+                                <li>Top two ingredients used (examples: slow roasted chicken, chickpeas)</li>
+                                <li>A personal or historical fact about the dish (example: This recipe was handed down from my mother and is a family favorite!)</li>
+                                <li>Please specify if the dish will include any garnishes or sides. Example: Dish will come with 2 slices of lime, 3 pieces of roti, a bowl of rice, a side of 4oz ketchup, etc.</li>
+                                <li>Customers will NOT be able to modify their dish. Please do not give an option such as “spicy or not spicy”, “choose your protein”, “this dish can be made vegan”, etc. in the description section.</li>
+                                <li>Please do NOT make health claims such as "high protein dish", "will heal you", "very healthy", "will make you lose weight", etc.</li>
+                            </ul>
+                            <mat-form-field appearance="outline" class="w-100"> 
+                                <textarea matInput formControlName="description" rows="7"></textarea> 
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <div fxFlex="50" fxFlex.gt="50" fxFlex.xs="100" fxFlex.sm="100" class="px-3">
+                    <div fxLayout="column wrap">
+                        <app-image-upload [base64]="formDemo.controls.image.value" [ngStyle]="{'width':'30%'}"
+                            [fileSize]="400"    
+                            [acceptTypes]="'image/png, image/jpeg, image/jpg'"
+                            (onFileChange)="fileChange($event)">
+                        </app-image-upload>
+                        <br/>
+                        <div [ngStyle]="{'border':'1px solid lightgray','padding':'20px 0  20px 20px'}">
+                            <label><b>Food Photo Instructions</b></label>
+                            <ol class="pl-3">
+                                <li>Use a circular, white bowl or plate.</li>
+                                <li>Take the photo from directly above. No tilting!</li>
+                                <li>Use natural sunlight during the day. No lighting from lamps or flash!</li>
+                                <li>Include the entire plate/bowl in the photo—don't cut off any edges.</li>
+                            </ol>
+                            <br/>
+                            <label><b>Accepted Photos</b></label>
+                            <br/>
+                            <div fxLayout="row wrap" fxLayoutAlign="start space-around">
+                                <div fxFlex="23">
+                                    <img [ngStyle]="{'width':'120px','height':'120px'}" src="assets/images/foods/good/1.jpg">
+                                    <div class="mat-header-cell">Good</div>
+                                </div>
+                                <div fxFlex="23">
+                                    <img [ngStyle]="{'width':'120px','height':'120px'}" src="assets/images/foods/good/2.jpg">
+                                    <div class="mat-header-cell">Good</div>
+                                </div>
+                                <div fxFlex="23">
+                                    <img [ngStyle]="{'width':'120px','height':'120px'}" src="assets/images/foods/good/3.jpg">
+                                    <div class="mat-header-cell">Good</div>
+                                </div>
+                                <div fxFlex="23">
+                                    <img [ngStyle]="{'width':'120px','height':'120px'}" src="assets/images/foods/good/4.jpg">
+                                    <div class="mat-header-cell">Good</div>
+                                </div>
+                            </div>
+                            <br/>
+                            <label><b>Rejected Photos</b></label>
+                            <br/>
+                            <div fxLayout="row wrap" fxLayoutAlign="start space-around">
+                                <div fxFlex="23">
+                                    <img [ngStyle]="{'width':'120px','height':'120px'}" src="assets/images/foods/bad/1.jpg">
+                                    <div class="mat-header-cell">Dish photo not taken from above and dish cut off</div>
+                                </div>
+                                <div fxFlex="23">
+                                    <img [ngStyle]="{'width':'120px','height':'120px'}" src="assets/images/foods/bad/2.jpg">
+                                    <div class="mat-header-cell">Dish is cut off, not entirely in the photo</div>
+                                </div>
+                                <div fxFlex="23">
+                                    <img [ngStyle]="{'width':'120px','height':'120px'}" src="assets/images/foods/bad/3.jpg">
+                                    <div class="mat-header-cell">No natural sunlight, it’s too dark</div>
+                                </div>
+                                <div fxFlex="23">
+                                    <img [ngStyle]="{'width':'120px','height':'120px'}" src="assets/images/foods/bad/4.jpg">
+                                    <div class="mat-header-cell">Food is spread across multiple dishes</div>
+                                </div>
+                            </div>
+                        </div>
+                        <br/>
+                    </div>
+                </div>
+                <div class="line px-3" fxFlex="100" fxFlex.gt="100" fxFlex.xs="100" fxFlex.sm="100"><mat-divider></mat-divider></div>
+                <div fxFlex="50" fxFlex.gt="50" fxFlex.xs="100" fxFlex.sm="100" class="px-3 pt-3">
+                    <label><b>Item Days of Week Availability</b></label>
+                    <br/>
+                    <span>Pick days of the week that this food item will be available for purchase. The item will be active (aka. published on your menu) on the days that are selected. Days must first be selected here before using the “Limit Item Availability” feature.</span>
+                    <div class="days-checkbox-container" [ngStyle]="{'padding':'10px','border':'1px solid'}">
+                        <ng-container *ngFor="let item of weekDays; index as i;">
+                            <mat-checkbox *ngIf="item.selected; else selected_false" [checked]="item.selected" [value]="item.v" (change)="alterWeekDaysSelection(i, $event)" [ngStyle]="{'padding':'1% 3%','margin':'0 1%','border':'1px solid red','border-radius':'50px'}">
+                                {{item.k}}
+                            </mat-checkbox>
+                            <ng-template #selected_false>
+                                <mat-checkbox [checked]="item.selected" [value]="item.v" (change)="alterWeekDaysSelection(i, $event)" [ngStyle]="{'padding':'1% 3%','margin':'0 1%','border':'1px solid red','border-radius':'50px'}">
+                                    <del>{{item.k}}</del>
+                                </mat-checkbox>
+                            </ng-template>
+                        </ng-container>
+                    </div>
+                    <br/>
+                    <label><b>Item Order Limit</b></label>
+                    <br/>
+                    <span>How many of this item you want to offer on a delivery day (1-100).</span>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <input matInput formControlName="perDayItemCookedCount" required>
+                    </mat-form-field>
+                </div>
+                <div fxFlex="50" fxFlex.gt="50" fxFlex.xs="100" fxFlex.sm="100" class="px-3 pt-3">
+                    <label><b>Limit Item Availability</b></label>
+                    <br/>
+                    <span>Control when this food item is available to your customers. You can make an item live on a specific date, phase it out, sell it for a limited time, or prevent orders for a specific amount of time. "Item Days of Week Availability" must be set before using this feature.</span>
+                    <br/>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-select formControlName="availability">
+                            <ng-container *ngFor="let flag of availabilityFlags">
+                                <mat-option [value]="flag.value">
+                                    {{flag.name}}
+                                  </mat-option>
+                            </ng-container>
+                        </mat-select>
+                    </mat-form-field>
+                    <div *ngIf="formDemo.value.availability != 0" fxLayout="row" fxLayoutGap="20px">
+                        <div fxFlex="50" fxFlex.gt="50" fxFlex.xs="100" fxFlex.sm="100">
+                            <label><b>Start Date:</b></label>
+                            <br/>
+                            <mat-form-field appearance="outline" class="w-100" (click)="releasedAtPicker.open()">
+                                <input matInput [matDatepicker]="releasedAtPicker" [min]="minDate" [matDatepickerFilter]="dateFilter" formControlName="startDate">
+                                <mat-datepicker-toggle matSuffix [for]="releasedAtPicker"></mat-datepicker-toggle>
+                                <mat-datepicker #releasedAtPicker></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                        <div *ngIf="formDemo.value.availability == 3 || formDemo.value.availability == 4" fxFlex="50" fxFlex.gt="50" fxFlex.xs="100" fxFlex.sm="100">
+                            <label><b>End Date:</b></label>
+                            <br/>
+                            <mat-form-field appearance="outline" class="w-100" (click)="releasedAtPicker.open()">
+                                <input matInput [matDatepicker]="releasedAtPicker" [min]="minDate" [matDatepickerFilter]="dateFilter" formControlName="endDate">
+                                <mat-datepicker-toggle matSuffix [for]="releasedAtPicker"></mat-datepicker-toggle>
+                                <mat-datepicker #releasedAtPicker></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="line px-3" fxFlex="100" fxFlex.gt="100" fxFlex.xs="100" fxFlex.sm="100"><mat-divider></mat-divider></div>
+                <div fxFlex="50" fxFlex.gt="50" fxFlex.xs="100" fxFlex.sm="100" class="px-3 pt-3">
+                    <label><b>Price</b></label>
+                    <br/>
+                    <span>Set a price for your dish. Our consumers come from a variety of backgrounds. We suggest having at least 1 dish on your menu priced under ₹560.99. We also suggest dish prices end with either .49 or .99. For example: ₹460.49 or ₹560.99.</span>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <input matInput formControlName="price" required>
+                    </mat-form-field>
+                    <ng-container *ngIf="formDemo.value.price">
+                        <label>Price Breakdown</label>
+                        <div fxFlexLayout="column wrap" class="pt-30 pb-30">
+                            <div fxFlexLayout="row wrap">
+                                <div fxFlex="3" fxFlex.gt="3" fxFlex.xs="3" fxFlex.sm="3" class="px-3" [ngStyle]="{'padding':'80px 0','background':'rgb(154, 225, 158)'}">
+
+                                </div>
+                                <div fxFlex="97" fxFlex.gt="97" fxFlex.xs="97" fxFlex.sm="97" class="px-3" [ngStyle]="{'padding':'80px 0','background':'rgb(232, 255, 233)'}">
+                                    <span>You earn ₹{{chefEarnings}} from each dish sold!</span>
+                                </div>
+                            </div>
+                            <div fxFlexLayout="row wrap">
+                                <div fxFlex="3" fxFlex.gt="3" fxFlex.xs="3" fxFlex.sm="3" class="px-3 pt-2 pb-2" [ngStyle]="{'background':'rgb(216, 216, 216)'}">
+
+                                </div>
+                                <div fxFlex="97" fxFlex.gt="97" fxFlex.xs="97" fxFlex.sm="97" class="px-3 pt-2 pb-2" [ngStyle]="{'background':'rgb(247, 247, 247)'}">
+                                    <span>Margin of ₹{{wpflMarginValue}} ({{wpflMarginPercent}})% to WPFL from each dish sold!</span>
+                                </div>
+                            </div>
+                            <div fxFlexLayout="row wrap">
+                                <div fxFlex="3" fxFlex.gt="3" fxFlex.xs="3" fxFlex.sm="3" class="px-3 pt-2 pb-2" [ngStyle]="{'background':'rgb(250, 107, 122)'}">
+
+                                </div>
+                                <div fxFlex="97" fxFlex.gt="97" fxFlex.xs="97" fxFlex.sm="97" class="px-3 pt-2 pb-2" [ngStyle]="{'background':'rgb(255, 234, 236)'}">
+                                    <span>GST ₹{{gstValue}} ({{gstPercent}})% from the WPFL margin!</span>
+                                </div>
+                            </div>
+                            <div fxFlexLayout="row wrap">
+                                <div fxFlex="3" fxFlex.gt="3" fxFlex.xs="3" fxFlex.sm="3" class="px-3 pt-2 pb-2" [ngStyle]="{'background':'rgb(250, 107, 122)'}">
+
+                                </div>
+                                <div fxFlex="97" fxFlex.gt="97" fxFlex.xs="97" fxFlex.sm="97" class="px-3 pt-2 pb-2" [ngStyle]="{'background':'rgb(255, 234, 236)'}">
+                                    <span>TDS ₹{{tdsValue}} ({{tdsPercent}})% paid to government!</span>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+                <div fxFlex="50" fxFlex.gt="50" fxFlex.xs="100" fxFlex.sm="100" class="px-3 pt-3">
+                    <label><b>Food Type</b></label>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-select formControlName="types">
+                          <ng-container *ngFor="let foodType of foodTypes">
+                            <mat-option [value]="foodType.id">
+                                {{foodType.name}}
+                              </mat-option>
+                          </ng-container>
+                        </mat-select>
+                    </mat-form-field>
+                    <label><b>Portion Size</b></label>
+                    <br/>
+                    <span>Ex: "16 oz. container", "2 pieces", etc.</span>
+                    <span>Please include the container size you will be serving your dish in.</span>
+                    <ul class="pl-4">
+                        <li>Note: The largest container size accepted is 32 oz.</li>
+                        <li>Please also include details such as how many pieces your dish will come with such as “2 pieces of roti”, “3 pieces of chicken wings”, “4 meatballs”, “ 5 skewers”, etc.</li>
+                        <li>Please include the portion size of each item that will be individually packaged, for example “12 oz daal + 4 pieces roti + 4 oz chutney”.</li>
+                    </ul>
+                    <mat-form-field appearance="outline" class="w-50 mr-2">
+                        <input matInput formControlName="size" required>
+                        <mat-error *ngIf="formDemo.controls.size.errors?.required">This field is required</mat-error>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="w-50 ml-2">
+                        <mat-select formControlName="unit">
+                            <ng-container *ngFor="let unity of units">
+                                <mat-option [value]="unity.id">{{unity.name}}</mat-option>
+                            </ng-container>
+                        </mat-select>
+                        <mat-error *ngIf="formDemo.controls.unit.errors?.required">This field is required</mat-error>
+                    </mat-form-field>
+                    <br/>
+                    <label><b>Expires in</b></label>
+                    <br/>
+                    <span>The number of days after delivery when this food item expires.</span>
+                    <br/>
+                    <mat-form-field appearance="outline" class="w-20">
+                        <input matInput formControlName="expiresIn" required>
+                        <mat-error *ngIf="formDemo.controls.expiresIn.errors?.required">This field is required</mat-error>
+                    </mat-form-field>
+                    <span> days</span>
+                </div>
+                <div class="line px-3" fxFlex="100" fxFlex.gt="100" fxFlex.xs="100" fxFlex.sm="100"><mat-divider></mat-divider></div>
+                <div fxFlex="100" fxFlex.gt="100" fxFlex.xs="100" fxFlex.sm="100" class="px-3 pt-3">
+                    <label><b>Ingredients</b></label>
+                    <br/>
+                    <span>List ALL ingredients used in this dish. Some customers have allergies, so please be detailed!</span>
+                    <br/>
+                    <span>Please include the following:</span>
+                    <ul class="pl-4">
+                        <li>Specific type of oil/fat/butter/broth used (example: canola oil, vegetable oil, olive oil, ghee, chicken broth, vegetable broth etc.)</li>
+                        <li>All seasonings and spices (example: chili seasoning, cumin, turmeric, salt, pepper, etc.) If you have any garnishes also add them to the ingredients list as well.</li>
+                        <li>All ingredients in homemade sauces, dips, and dressings (example: tomato sauce = tomatoes, garlic, onion, olive oil, tomato paste).</li>
+                        <li>List if the protein has "bone-in" or "boneless".</li>
+                    </ul>
+                    <span>Ex: Organic bone-in chicken, coriander, cashew nuts, fenugreek, black pepper, mustard seeds, cinnamon stick, onions, garlic, ginger, tomatoes, turmeric, salt, olive oil, lemon juice, green chilies, and coconut milk.</span>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-select multiple (selectionChange)="handleIngredients($event)" required>
+                          <ng-container *ngFor="let ingredient of ingredients">
+                            <mat-option [value]="ingredient.id">
+                                {{ingredient.name}}
+                              </mat-option>
+                          </ng-container>
+                        </mat-select>
+                        <mat-error *ngIf="formDemo.controls.ingredients.errors?.required">This field is required</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="line px-3" fxFlex="100" fxFlex.gt="100" fxFlex.xs="100" fxFlex.sm="100"><mat-divider></mat-divider></div>
+                <div fxFlex="50" fxFlex.gt="50" fxFlex.xs="100" fxFlex.sm="100" class="px-3 pt-3">
+                    <label><b>Reheating Instructions</b></label>
+                    <br/>
+                    <span>Please be sure to include how many minutes it needs to be microwaved for (example: please microwave for 3 minutes on high) and if on the stove top/oven, what heat level (low, medium, high/degrees F) and for how many minutes.</span>
+                    <br/><br/>
+                    <span>Ex: Beware of the bones. Place into a bowl & microwave for 1-2 min, stirring midway through. Or heat in a saucepan with 1 tbsp water over low heat for 4-5 min. Let it cool for a minute & enjoy!</span>
+                    <mat-form-field appearance="outline" class="w-100"> 
+                        <textarea matInput formControlName="reheatingInstructions" rows="7"></textarea> 
+                    </mat-form-field>                    
+                </div>
+                <div fxFlex="50" fxFlex.gt="50" fxFlex.xs="100" fxFlex.sm="100" class="px-3 pt-3">
+                    <label><b>Spice Level</b></label>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-select formControlName="spiceLevel">
+                          <mat-option value="Not Spicy">Not Spicy</mat-option>
+                          <mat-option value="Mild">Mild</mat-option>
+                          <mat-option value="Medium">Medium</mat-option>
+                          <mat-option value="Hot">Hot</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <label><b>Other tags (optional)</b></label>
+                    <br/>
+                    <ng-container *ngFor="let foodTag of foodTags; index as i">
+                        <mat-checkbox *ngIf="foodTag.description==''; else food_tags_with_description" appearance="outline" class="w-100" [value]="foodTag.id" (change)="handleTags($event)">
+                            {{foodTag.name}}
+                        </mat-checkbox>
+                        <ng-template #food_tags_with_description>
+                            <mat-checkbox appearance="outline" class="w-100" [value]="foodTag.id" (change)="handleTags($event)">
+                                {{foodTag.name}}
+                            </mat-checkbox>
+                        </ng-template>
+                    </ng-container>
+                </div>
+                <div fxFlex="100" fxFlex.gt="100" fxFlex.xs="100" fxFlex.sm="100" class="px-3 pt-3">
+                    <mat-form-field appearance="outline" class="w-100"> 
+                        <textarea matInput formControlName="comment" placeholder="Leave a comment" rows="7"></textarea> 
+                    </mat-form-field>
+                </div>
+
+                <div fxFlex="100" class="mt-2 text-center w-100">
+                    <button mat-raised-button color="primary" type="submit" class="uppercase">Submit</button>
+                </div>
+            </form>
+        </mat-card-content> 
+    </mat-card>
+</div>

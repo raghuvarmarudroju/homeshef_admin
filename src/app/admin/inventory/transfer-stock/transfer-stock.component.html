@@ -1,0 +1,116 @@
+<div class="p-2">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off" fxLayout="row wrap">
+        <mat-card fxFlex="100" class="mbb-5">
+            <div fxFlex="100" class="px-2">
+                
+                <div fxLayout="row wrap">
+                    <div fxFlex="100" fxFlex.gt-sm="30" class="prl-5 mbb-5">
+                        <fieldset>
+                            <legend>From</legend>
+                            <div fxLayout="row wrap">
+                                <div fxFlex="100" fxFlex.gt-sm="100" class="prl-5 mbb-5">
+                                    <mat-form-field appearance="outline" class="w-100">
+                                        <mat-label>Business Type</mat-label>
+                                        <mat-select formControlName="from_business_type" (ngModelChange)="fromBusinessChanged($event)">
+                                            <mat-option  value='{{ee}}' selected ><span>Processing Center</span></mat-option>
+                                            <mat-option  value='b2b'><span>B2B</span></mat-option>
+                                            <mat-option  value='b2c'><span>B2C</span></mat-option>
+                                            <mat-option  value='qmart'><span>Qmart</span></mat-option>
+                                            <mat-option  value='platforms'><span>Platform</span></mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div fxFlex="100" fxFlex.gt-sm="100" class="prl-5 mbb-5" *ngIf="isFromStore">
+                                    <mat-form-field appearance="outline" class="w-100">
+                                        <mat-label>Store</mat-label>
+                                        <mat-select formControlName="from_store_id"  (ngModelChange)="fromStoreChanged($event)">
+                                            <mat-option *ngFor="let cat of appService.Data.stores" [value]="cat.id">
+                                                <span>{{cat.name}}</span>
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div fxFlex="100" fxFlex.gt-sm="70" class="prl-5">
+                        <fieldset>
+                            <legend>To</legend>
+                            <div fxLayout="row wrap">
+                                <div fxFlex="100" fxFlex.gt-sm="80" class="prl-5">
+                                    <div fxLayout="row wrap">
+                                        <div fxFlex="100" fxFlex.gt-sm="33.3" class="prl-5 mbb-5">
+                                            <mat-form-field appearance="outline" class="w-100">
+                                                <mat-label>Business Type</mat-label>
+                                                <mat-select formControlName="business_type" required (ngModelChange)="toBusinessChanged($event)">
+                                                    <mat-option  value='b2b'><span>B2B</span></mat-option>
+                                                    <mat-option  value='b2c'><span>B2C</span></mat-option>
+                                                    <mat-option  value='qmart'><span>Qmart</span></mat-option>
+                                                    <mat-option  value='platforms'><span>Platform</span></mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                        <div fxFlex="100" fxFlex.gt-sm="33.3" class="prl-5 mbb-5" >
+                                            <mat-form-field appearance="outline" class="w-100" *ngIf="isToStore">
+                                                <mat-label>Store</mat-label>
+                                                <mat-select formControlName="store_id" required>
+                                                    <mat-option *ngFor="let cat of appService.Data.stores" [value]="cat.id">
+                                                        <span>{{cat.name}}</span>
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                        <div fxFlex="100" fxFlex.gt-sm="33.3" class="prl-5 mbb-5">
+                                            <mat-form-field appearance="outline" class="w-100">
+                                                <mat-label>Expiry Date</mat-label>
+                                                <input matInput [matDatepicker]="birthday" placeholder="Expiry Date" formControlName="expiry_date">
+                                                <mat-datepicker-toggle matSuffix [for]="birthday"></mat-datepicker-toggle>
+                                                <mat-datepicker #birthday></mat-datepicker>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div fxFlex="100" fxFlex.gt-sm="20" class="prl-5 mbb-5">
+                                    <div fxLayout="row wrap">
+                                        <div fxFlex="100" fxFlex.gt-sm="100" class="prl-5 text-right w-100">
+                                            <button mat-raised-button color="primary" type="submit" class="uppercase">TRANSFER</button>
+                                        </div>
+                                    </div>
+                                </div> 
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+        </mat-card>
+        
+        <mat-card fxFlex="100" >
+            <div fxFlex="100" class="px-2" formArrayName="products">
+                <div fxLayout="row wrap" *ngFor="let product of products().controls; let empIndex=index"> 
+                    <span class="mbb-5" [formGroupName]="empIndex" fxFlex="100">
+                        <div fxFlex="100" fxFlex.gt-sm="70" class="prl-5 mbb-5">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Product Name</mat-label>
+                                <input matInput type="text" placeholder="Name" formControlName="product_name" readonly>
+                            </mat-form-field>
+                        </div>
+                        <input matInput placeholder="Name" formControlName="product_id" hidden>
+                        <div fxFlex="100" fxFlex.gt-sm="15" class="prl-5 mbb-5">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Available Quantity</mat-label>
+                                <input matInput type="text" placeholder="Available Quantity" readonly formControlName="available_qty">
+                            </mat-form-field>
+                        </div>
+                        <div fxFlex="100" fxFlex.gt-sm="15" class="prl-5 mbb-5">
+                            <mat-form-field appearance="outline" class="w-100">
+                                <mat-label>Transfer Quantity</mat-label>
+                                <input matInput type="text" placeholder="Transfer Quantity" required  formControlName="transfer_qty">
+                                
+                            </mat-form-field>
+                        </div>
+                    </span>
+                </div>
+            </div>
+        </mat-card>
+    </form>
+</div>

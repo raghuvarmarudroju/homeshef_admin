@@ -1,0 +1,21 @@
+.file-upload{
+    position: relative;
+    height: 30px; 
+    width: 100%;
+    input[type='file']{
+        position: absolute;  
+        z-index: 2;
+        height: 55px;
+        cursor: pointer;
+        opacity: 0;  
+        font-size: 0;
+        outline: none;
+        width: 100%;
+    }
+} 
+ .mat-raised-button.mat-primary {
+    margin-right: 5px !important;
+}
+.mat-form-field-appearance-outline .mat-form-field-infix{
+    padding: 0px !important;
+}
