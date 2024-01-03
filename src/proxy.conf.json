@@ -1,6 +1,6 @@
 {
     "/api/*": {
-        "target": "https://beta.topchop.in/",
+        "target": "https://api.homeshef.in/",
         "secure": false,
         "logLevel": "debug"
     }

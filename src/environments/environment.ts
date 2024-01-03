@@ -5,9 +5,9 @@
 export const environment = {
   production: false,
   url: '',
-  baseURL: 'https://beta.topchop.in/api/',
-  mediaURL: 'https://beta.topchop.in/storage/',
-  adminURL: 'https://beta.topchop.in/administration/',
+  baseURL: 'https://api.homeshef.in/api/',
+  mediaURL: 'https://api.homeshef.in/storage/',
+  adminURL: 'https://api.homeshef.in/administration/',
   basic:'123456',
 };
 

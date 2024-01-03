@@ -84,7 +84,7 @@ export class AppService {
         "basic": environment.basic
       })
     };
-    return this.http.post(environment.adminURL + 'cheflogin', input,httpOptions)
+    return this.http.post(environment.adminURL + 'login', input,httpOptions)
       .pipe(
         map(
           (response:any) => {
@@ -181,6 +181,51 @@ public updateChefStatus(input:any){
     })
   };
   return this.http.post(environment.adminURL + 'user/updateStatus', input,httpOptions)
+    .pipe(
+      map(
+        (response:any) => {
+          if (response) {
+            return response;
+          }
+        },
+        (error: any) => {
+          return error;
+        }
+      )
+    )
+}
+public getWithdrawls(input: any){
+  const httpOptions = {
+    headers: new HttpHeaders({
+      "basic": environment.basic
+    })
+  };
+  
+  return this.http.post(environment.adminURL + 'withdrawls', input,httpOptions)
+    .pipe(
+      map(
+        (response:any) => {
+          if (response) {
+            return response;
+          }
+        },
+        (error: any) => {
+          return error;
+        }
+      )
+    )
+  //return this.http.get<any[]>(this.url + 'orders.json');
+}
+public updateWithdrawls(date : any){
+  const httpOptions = {
+    headers: new HttpHeaders({
+      "basic": environment.basic
+    })
+  };
+  const input = {
+    date : date
+  }
+  return this.http.post(environment.adminURL + 'chef/update_withdrawls', input,httpOptions)
     .pipe(
       map(
         (response:any) => {
@@ -412,6 +457,9 @@ public editAddress(input:any){
 
   public getCusines(): Observable<any[]>{
     return this.http.get<any[]>(environment.adminURL + 'cuisines',httpOptions);
+  }
+  public getBanners(): Observable<any[]>{
+    return this.http.get<any[]>(environment.adminURL + 'banners',httpOptions);
   }
   public getCommunities(): Observable<any[]>{
     return this.http.get<any[]>(environment.baseURL + 'communities');
@@ -1155,7 +1203,7 @@ public editAddress(input:any){
             position: 'Head of Chef',
             desc: 'Phasellus sed metus leo. Donec laoreet, lacus ut suscipit convallis, erat enim eleifend nulla, at sagittis enim urna et lacus.',            
             organization: 'Restaurant',
-            email: 'andy.w@mox.com',
+            email: 'andy.w@homeshef.com',
             phone: '(212) 457-2308',
             social: {
               facebook: 'andy.warhol',
@@ -1174,7 +1222,7 @@ public editAddress(input:any){
             position: 'Assistant Chef',
             desc: 'Phasellus sed metus leo. Donec laoreet, lacus ut suscipit convallis, erat enim eleifend nulla, at sagittis enim urna et lacus.',            
             organization: 'Restaurant',
-            email: 'lusia.m@mox.com',
+            email: 'lusia.m@homeshef.com',
             phone: '(224) 267-1346',
             social: {
               facebook: 'lusia.manuel',
@@ -1193,7 +1241,7 @@ public editAddress(input:any){
             position: 'Intern Chef',
             desc: 'Phasellus sed metus leo. Donec laoreet, lacus ut suscipit convallis, erat enim eleifend nulla, at sagittis enim urna et lacus.',            
             organization: 'Restaurant',
-            email: 'michael.b@mox.com',
+            email: 'michael.b@homeshef.com',
             phone: '(267) 388-1637',
             social: {
               facebook: 'michael.blair',
@@ -1212,7 +1260,7 @@ public editAddress(input:any){
             position: 'Assistant Chef',
             desc: 'Phasellus sed metus leo. Donec laoreet, lacus ut suscipit convallis, erat enim eleifend nulla, at sagittis enim urna et lacus.',            
             organization: 'Restaurant',
-            email: 'tereza.s@mox.com',
+            email: 'tereza.s@homeshef.com',
             phone: '(214) 617-2614',
             social: {
               facebook: 'tereza.stiles',
@@ -1231,7 +1279,7 @@ public editAddress(input:any){
             position: 'Head of Chef',
             desc: 'Phasellus sed metus leo. Donec laoreet, lacus ut suscipit convallis, erat enim eleifend nulla, at sagittis enim urna et lacus.',            
             organization: 'Restaurant',
-            email: 'michelle.o@mox.com',
+            email: 'michelle.o@homeshef.com',
             phone: '(267) 388-1637',
             social: {
               facebook: 'michelle.ormond',

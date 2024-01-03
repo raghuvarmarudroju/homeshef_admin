@@ -16,7 +16,8 @@ export const routes = [
   { 
     path: '', 
     component: AdminComponent, children: [
-      { path: '', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),canActivate: [AuthGuard], data: { roles: [1,3,5,8] } }, 
+      { path: '', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),canActivate: [AuthGuard], data: { roles: [1,3,5,8] } },
+      { path: 'slides', loadChildren: () => import('./slides/slides.module').then(m => m.SlidesModule),canActivate: [AuthGuard], data: { roles: [1] } },
       { path: 'menu-items', loadChildren: () => import('./menu-items/menu-items.module').then(m => m.MenuItemsModule),canActivate: [AuthGuard], data: { roles: [1,3] } },
       { path: 'stock', loadChildren: () => import('./inventory/inventory.module').then(m => m.InventoryModule),canActivate: [AuthGuard], data: { roles: [1,3,5,8] } },
       { path: 'sales', loadChildren: () => import('./sales/sales.module').then(m => m.SalesModule),canActivate: [AuthGuard], data: { roles: [1,3] } },

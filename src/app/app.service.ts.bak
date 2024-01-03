@@ -763,7 +763,7 @@ export class AppService {
             position: 'Head of Chef',
             desc: 'Phasellus sed metus leo. Donec laoreet, lacus ut suscipit convallis, erat enim eleifend nulla, at sagittis enim urna et lacus.',            
             organization: 'Restaurant',
-            email: 'andy.w@mox.com',
+            email: 'andy.w@homeshef.com',
             phone: '(212) 457-2308',
             social: {
               facebook: 'andy.warhol',
@@ -782,7 +782,7 @@ export class AppService {
             position: 'Assistant Chef',
             desc: 'Phasellus sed metus leo. Donec laoreet, lacus ut suscipit convallis, erat enim eleifend nulla, at sagittis enim urna et lacus.',            
             organization: 'Restaurant',
-            email: 'lusia.m@mox.com',
+            email: 'lusia.m@homeshef.com',
             phone: '(224) 267-1346',
             social: {
               facebook: 'lusia.manuel',
@@ -801,7 +801,7 @@ export class AppService {
             position: 'Intern Chef',
             desc: 'Phasellus sed metus leo. Donec laoreet, lacus ut suscipit convallis, erat enim eleifend nulla, at sagittis enim urna et lacus.',            
             organization: 'Restaurant',
-            email: 'michael.b@mox.com',
+            email: 'michael.b@homeshef.com',
             phone: '(267) 388-1637',
             social: {
               facebook: 'michael.blair',
@@ -820,7 +820,7 @@ export class AppService {
             position: 'Assistant Chef',
             desc: 'Phasellus sed metus leo. Donec laoreet, lacus ut suscipit convallis, erat enim eleifend nulla, at sagittis enim urna et lacus.',            
             organization: 'Restaurant',
-            email: 'tereza.s@mox.com',
+            email: 'tereza.s@homeshef.com',
             phone: '(214) 617-2614',
             social: {
               facebook: 'tereza.stiles',
@@ -839,7 +839,7 @@ export class AppService {
             position: 'Head of Chef',
             desc: 'Phasellus sed metus leo. Donec laoreet, lacus ut suscipit convallis, erat enim eleifend nulla, at sagittis enim urna et lacus.',            
             organization: 'Restaurant',
-            email: 'michelle.o@mox.com',
+            email: 'michelle.o@homeshef.com',
             phone: '(267) 388-1637',
             social: {
               facebook: 'michelle.ormond',

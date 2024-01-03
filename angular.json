@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "mox": {
+    "homeshef": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -97,18 +97,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "mox:build"
+            "browserTarget": "homeshef:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "mox:build:production"
+              "browserTarget": "homeshef:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "mox:build"
+            "browserTarget": "homeshef:build"
           }
         },
         "test": {
@@ -132,11 +132,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "mox:serve"
+            "devServerTarget": "homeshef:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "mox:serve:production"
+              "devServerTarget": "homeshef:serve:production"
             }
           }
         },
@@ -166,21 +166,21 @@
         "serve-ssr": {
           "builder": "@nguniversal/builders:ssr-dev-server",
           "options": {
-            "browserTarget": "mox:build",
-            "serverTarget": "mox:server"
+            "browserTarget": "homeshef:build",
+            "serverTarget": "homeshef:server"
           },
           "configurations": {
             "production": {
-              "browserTarget": "mox:build:production",
-              "serverTarget": "mox:server:production"
+              "browserTarget": "homeshef:build:production",
+              "serverTarget": "homeshef:server:production"
             }
           }
         },
         "prerender": {
           "builder": "@nguniversal/builders:prerender",
           "options": {
-            "browserTarget": "mox:build:production",
-            "serverTarget": "mox:server:production",
+            "browserTarget": "homeshef:build:production",
+            "serverTarget": "homeshef:server:production",
             "routes": [
               "/"
             ]
@@ -192,5 +192,5 @@
       }
     }
   },
-  "defaultProject": "mox"
+  "defaultProject": "homeshef"
 }
