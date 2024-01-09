@@ -13,7 +13,7 @@ import { CategoryDialogComponent } from './category-dialog/category-dialog.compo
   styleUrls: ['./categories.component.scss']
 })
 export class CategoriesComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'name', 'description', 'edit', 'remove'];
+  displayedColumns: string[] = ['id', 'name', 'description', 'remove'];
   dataSource!: MatTableDataSource<Category>;
   @ViewChild(MatPaginator, {static: true}) paginator!: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort!: MatSort;

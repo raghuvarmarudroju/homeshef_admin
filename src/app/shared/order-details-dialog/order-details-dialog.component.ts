@@ -39,13 +39,22 @@ export class OrderDetailsDialogComponent implements OnInit {
  
 
   ngOnInit(): void {
-
+    console.log(this.order);
   }
   checkStatus(id:any){
     if(this.order.orderstatus.find((item : any) => item.status == id) ){
       return true;
     }
     return false;
+  }
+  checkStatuss(id:any){
+    if(id == 3 || id == 6){
+      if(this.order.orderstatus.find((item : any) => item.status == id) ){
+        return true;
+      }
+      return false;
+    }
+    return true;
   }
 
 }

@@ -8,15 +8,18 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { PipesModule } from 'src/app/theme/pipes/pipes.module';
 import { AgmCoreModule } from '@agm/core';
+import { SlideDialogComponent } from './slide-dialog/slide-dialog.component';
 
 
 
 export const routes = [
-  { path: '', component: SlidesComponent, pathMatch: 'full' }
+  { path: '', component: SlidesComponent, pathMatch: 'full' },
+
 ];
 @NgModule({
   declarations: [
-    SlidesComponent
+    SlidesComponent,
+    SlideDialogComponent
   ],
   imports: [
     CommonModule,

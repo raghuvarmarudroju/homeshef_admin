@@ -194,6 +194,26 @@ public updateChefStatus(input:any){
       )
     )
 }
+public updateChefApproval(input:any){
+  const httpOptions = {
+    headers: new HttpHeaders({
+      "basic": environment.basic
+    })
+  };
+  return this.http.post(environment.adminURL + 'user/updateApproval', input,httpOptions)
+    .pipe(
+      map(
+        (response:any) => {
+          if (response) {
+            return response;
+          }
+        },
+        (error: any) => {
+          return error;
+        }
+      )
+    )
+}
 public getWithdrawls(input: any){
   const httpOptions = {
     headers: new HttpHeaders({
@@ -460,6 +480,36 @@ public editAddress(input:any){
   }
   public getBanners(): Observable<any[]>{
     return this.http.get<any[]>(environment.adminURL + 'banners',httpOptions);
+  }
+  public saveBanner(input:any){
+    return this.http.post(environment.adminURL + 'banner/create', input,httpOptions)
+      .pipe(
+        map(
+          (response:any) => {
+            if (response) {
+              return response;
+            }
+          },
+          (error: any) => {
+            return error;
+          }
+        )
+      )
+  }
+  public updateBanner(input:any){
+    return this.http.post(environment.adminURL + 'banner/update', input,httpOptions)
+      .pipe(
+        map(
+          (response:any) => {
+            if (response) {
+              return response;
+            }
+          },
+          (error: any) => {
+            return error;
+          }
+        )
+      )
   }
   public getCommunities(): Observable<any[]>{
     return this.http.get<any[]>(environment.baseURL + 'communities');

@@ -1,0 +1,72 @@
+<mat-card class="m-2 p-0">
+    <div fxLayout="row wrap" fxLayoutAlign="space-between center" class="w-100 p-2">
+        <div></div>
+        <button mat-raised-button color="primary" (click)="openChefDialog(null)">
+            <mat-icon>add</mat-icon>
+            Add New Chef
+        </button>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="table-wrapper"> 
+        <table mat-table [dataSource]="dataSource" matSort class="w-100">
+        
+            <!-- FullName Column -->
+            <ng-container matColumnDef="fullName">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Full Name </th>
+                <td mat-cell *matCellDef="let chef">{{chef.name}}</td>
+            </ng-container>  
+
+            <!-- Username Column -->
+            <ng-container matColumnDef="username">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Kitchen Name </th>
+                <td mat-cell *matCellDef="let chef">{{chef.kitchen_name}} </td>
+            </ng-container> 
+    
+            <!-- Email Column -->
+            <ng-container matColumnDef="email">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+                <td mat-cell *matCellDef="let chef">{{chef.email}}</td>
+            </ng-container>  
+            
+            <!-- Store Column -->
+            <ng-container matColumnDef="storeId">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Community </th>
+                <td mat-cell *matCellDef="let chef">{{chef.community?.name}}</td>
+            </ng-container>   
+
+            <!-- Wallet Balance Column -->
+            <ng-container matColumnDef="walletBalance">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Status </th>
+                <td mat-cell *matCellDef="let chef">
+                    <div class="user-social">
+                        <mat-slide-toggle color="primary" [checked]="getStatus(chef.is_active)"  (change)="toggle($event,chef.id)"></mat-slide-toggle>
+                    </div>
+                </td>
+            </ng-container> 
+
+            <!-- Revenue Column -->
+            <ng-container matColumnDef="revenue">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Account status </th>
+                <td mat-cell *matCellDef="let chef">{{getVerificationStatus(chef.is_verified)}}</td>
+            </ng-container>  
+    
+            <!-- Actions Column -->
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef> Actions </th>
+                <td mat-cell *matCellDef="let chef"> 
+                    <button mat-icon-button color="primary" (click)="openChefDialog(chef)" matTooltip="Edit">
+                        <mat-icon>edit</mat-icon>
+                    </button> 
+                    <button mat-icon-button color="warn" (click)="remove(chef)" matTooltip="Remove">
+                        <mat-icon>delete</mat-icon>
+                    </button>  
+                </td>
+            </ng-container> 
+        
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let chef; columns: displayedColumns;"></tr>
+        </table> 
+        <p *ngIf="dataSource && dataSource.data.length === 0" class="py-5 mb-0 text-center">No data available</p> 
+    </div>
+    <mat-paginator showFirstLastButtons [pageSizeOptions]="[5, 10, 25, 50]"></mat-paginator>
+</mat-card>

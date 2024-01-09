@@ -1,0 +1,47 @@
+<div class="header bg-primary">
+    <div fxLayout="row wrap" fxLayoutAlign="space-between center">
+        <h2 class="fw-500 secondary-font">Details</h2>
+        <app-dialog-header-controls [dialogRef]="dialogRef"></app-dialog-header-controls> 
+    </div>   
+</div> 
+<mat-dialog-content>  
+    <div class="pt-3 chef-details">
+        <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign="start start" fxLayoutAlign.gt-xs="start center" class="mb-3"> 
+            <div fxLayout="row" fxLayoutAlign="start center"><mat-icon color="primary">today</mat-icon><span>Registered Date :&nbsp;</span></div>
+            <div>{{chef.created_at | date:"dd MMMM, yyyy 'at' HH:mm"}}</div> 
+        </div>
+        <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign="start start" fxLayoutAlign.gt-xs="start center" class="mb-3"> 
+            <div fxLayout="row" fxLayoutAlign="start center"><mat-icon color="primary">schedule</mat-icon><span>Community :&nbsp;</span></div>
+            <div>{{chef.community.name}}</div> 
+        </div>
+        <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign="start start" fxLayoutAlign.gt-xs="start center" class="mb-3"> 
+            <div fxLayout="row" fxLayoutAlign="start center"><mat-icon color="primary">group</mat-icon><span>Guests :&nbsp;</span></div>
+            <div>{{chef.created_at}}</div> 
+        </div>
+        <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign="start start" fxLayoutAlign.gt-xs="start center" class="mb-3"> 
+            <div fxLayout="row" fxLayoutAlign="start center"><mat-icon color="primary">format_list_numbered</mat-icon><span>Table No. :&nbsp;</span></div>
+            <div>{{chef.created_at}}</div> 
+        </div>
+        <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign="start start" fxLayoutAlign.gt-xs="start center" class="mb-3"> 
+            <div fxLayout="row" fxLayoutAlign="start center"><mat-icon color="primary">flaky</mat-icon><span>Status :&nbsp;</span></div>
+            <div>{{chef.created_at}}</div> 
+        </div>  
+        <h3 class="py-3 divider">Chef Information:</h3>
+        <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign="start start" fxLayoutAlign.gt-xs="start center" class="mb-3"> 
+            <div fxLayout="row" fxLayoutAlign="start center"><mat-icon color="primary">person</mat-icon><span>Full Name :&nbsp;</span></div>
+            <div>{{chef.name}}</div> 
+        </div>
+        <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign="start start" fxLayoutAlign.gt-xs="start center" class="mb-3"> 
+            <div fxLayout="row" fxLayoutAlign="start center"><mat-icon color="primary">email</mat-icon><span>Email :&nbsp;</span></div>
+            <div>{{chef.email}}</div> 
+        </div>
+        <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign="start start" fxLayoutAlign.gt-xs="start center" class="mb-3"> 
+            <div fxLayout="row" fxLayoutAlign="start center"><mat-icon color="primary">call</mat-icon><span>Phone Number :&nbsp;</span></div>
+            <div>{{chef.number}}</div> 
+        </div>
+        <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign="start start" fxLayoutAlign.gt-xs="start center" class="mb-3"> 
+            <div fxLayout="row" fxLayoutAlign="start center"><mat-icon color="primary">location_on</mat-icon><span>Address :&nbsp;</span></div>
+            <div>{{chef.chef_address.address}}</div> 
+        </div> 
+    </div>  
+</mat-dialog-content> 

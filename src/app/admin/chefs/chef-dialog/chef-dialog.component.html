@@ -1,0 +1,167 @@
+<h1 mat-dialog-title><span *ngIf="!user.id">Add</span><span *ngIf="user.id">Edit</span> user</h1>
+<form [formGroup]="form" class="user-form" (ngSubmit)="onRegisterFormSubmit()">
+    <div mat-dialog-content>      
+        <mat-tab-group class="horizontal-tabs">
+            <mat-tab label="Basic">
+                
+                <div fxLayout="row wrap" class="mt-2" >
+                    <div fxFlex="60" fxFlex.gt.sm="60">
+                        <div fxLayout="row wrap" >
+                            <div fxFlex="100" fxFlex.gt-sm="50" class="px-3">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label><mat-icon>person</mat-icon> Name</mat-label>
+                                    <input matInput formControlName="name" required>
+                                    <mat-error *ngIf="form.controls.name.errors?.required">Name is required</mat-error>
+                                    <mat-error *ngIf="form.controls.name.hasError('minlength')">Name isn't long enough, minimum of 5 characters</mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div fxFlex="100" fxFlex.gt-sm="50" class="px-3">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label><mat-icon>mail</mat-icon> Email</mat-label>
+                                    <input matInput formControlName="email" required>
+                                    <mat-error *ngIf="form.controls.email.errors?.required">Email is required</mat-error>
+                                    
+                                </mat-form-field>
+                            </div>
+                            <div fxFlex="100" fxFlex.gt-sm="50" class="px-3">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>Mobile</mat-label>
+                                    <input matInput placeholder="Mobile Number" formControlName="number"> 
+                                    <mat-error *ngIf="form.controls.number.errors?.required">Mobile number is required</mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div fxFlex="100" fxFlex.gt-sm="50" class="px-3">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-icon matPrefix class="mr-1 text-muted">fastfood</mat-icon>
+                                    <mat-label>Cusines</mat-label>
+                                    <mat-select formControlName="cuisines" multiple required>
+                                        <mat-option *ngFor="let cus of cuisines" [value]="cus.id">
+                                            <span>{{cus.name}}</span>
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="form.controls.cuisines.errors?.required">Cuisine is required</mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div fxFlex="100" fxFlex.gt-sm="50" class="px-3">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label><mat-icon>vpn_key</mat-icon> Password</mat-label>
+                                    <input matInput formControlName="password" required [type]="passwordHide ? 'password' : 'text'">
+                                    <mat-icon matSuffix (click)="passwordHide = !passwordHide">{{passwordHide ? 'visibility' : 'visibility_off'}}</mat-icon>
+                                    <mat-error *ngIf="form.controls.password.errors?.required">Password is required</mat-error>
+                                    <mat-error *ngIf="form.controls.password.hasError('minlength')">Password isn't long enough, minimum of 6 characters</mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div fxFlex="100" fxFlex.gt-sm="50" class="px-3">
+                                <mat-form-field  appearance="outline" class="w-100">
+                                    <mat-icon matPrefix class="mr-1 text-muted">lock</mat-icon>
+                                    <mat-label>Confirm Password</mat-label>
+                                    <input matInput placeholder="Confirm Password" formControlName="confirmPassword" type="password" required [type]="hide ? 'password' : 'text'">
+                                    <mat-error *ngIf="form.controls.confirmPassword.errors?.required">Confirm Password is required</mat-error>
+                                    <mat-error *ngIf="form.controls.confirmPassword.hasError('mismatchedPasswords')">Passwords do not match</mat-error>
+                                    <button mat-icon-button matSuffix (click)="hide = !hide" type="button" class="text-muted">
+                                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                    </button>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div fxLayout="row wrap" class="mt-2" formGroupName="address">
+                            <!-- <div fxFlex="100" fxFlex.gt-sm="50" class="px-3">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>Name</mat-label>
+                                    <input matInput placeholder="Name" formControlName="name" required>
+                                    <mat-error *ngIf="form.get('address.name')!.errors?.required">Name is required</mat-error>   
+                                </mat-form-field>
+                            </div>
+                            <div fxFlex="100" fxFlex.gt-sm="50" class="px-3">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>Email</mat-label>
+                                    <input matInput placeholder="Email" formControlName="email">
+                                </mat-form-field>
+                            </div> -->
+                            
+                            <div fxFlex="40" fxFlex.gt-sm="40" class="px-3">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>Community</mat-label>
+                                    <mat-select formControlName="community_id" required>
+                                        <mat-option *ngFor="let cus of communities" [value]="cus.id">
+                                            <span>{{cus.name}}</span>
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="form.controls.community_id.errors?.required">Community is required</mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div fxFlex="60" fxFlex.gt-sm="60" class="px-3">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>Address</mat-label>
+                                    <input matInput placeholder="Address" formControlName="address" #search autocorrect="off" autocapitalize="off" spellcheck="off"> 
+                                    <mat-error *ngIf="form.get('address.address')!.errors?.required">Address is required</mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div fxFlex="100" fxFlex.gt-sm="50" class="px-3">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>House/Flat NO.</mat-label>
+                                    <input matInput placeholder="House/Flat NO." formControlName="house"> 
+                                    <mat-error *ngIf="form.get('address.house')!.errors?.required">House/Flat NO. is required</mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div fxFlex="100" fxFlex.gt-sm="50" class="px-3">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>Landmark</mat-label>
+                                    <input matInput placeholder="Landmark" formControlName="landmark"> 
+                                    <mat-error *ngIf="form.get('address.landmark')!.errors?.required">Landmark is required</mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div fxFlex="100" fxFlex.gt-sm="50" class="px-3">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>City</mat-label>
+                                    <input matInput placeholder="City" formControlName="city"> 
+                                    <mat-error *ngIf="form.get('address.city')!.errors?.required">City is required</mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div fxFlex="100" fxFlex.gt-sm="50" class="px-3">
+                                <mat-form-field appearance="outline" class="w-100">
+                                    <mat-label>Pincode</mat-label>
+                                    <input matInput placeholder="Pincode" formControlName="pincode" readonly> 
+                                    <mat-error *ngIf="form.get('address.pincode')!.errors?.required">Pincode is required</mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                    <div fxFlex="40" fxFlex.gt.sm="40">
+                        <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom" (centerChange)="centerChanged($event)" (mapReady)="mapReady($event)">
+                            <agm-marker [latitude]="latitude" [longitude]="longitude" [markerDraggable]="true" (dragEnd)="markerDragEnd($event)"
+                              ></agm-marker>
+                          </agm-map>
+                    </div>
+                </div>
+            </mat-tab>
+            <mat-tab label="Social life" formGroupName="social">
+                <div fxLayout="column" class="form-field-outer">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <input matInput placeholder="Facebook" formControlName="facebook">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <input matInput placeholder="Twitter" formControlName="twitter">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <input matInput placeholder="Google" formControlName="google">
+                    </mat-form-field>
+                </div>
+            </mat-tab>
+            <mat-tab label="Settings" formGroupName="settings">
+                <div fxLayout="column" class="form-field-outer">
+                    <mat-checkbox formControlName="isActive">Active</mat-checkbox>
+                    <mat-checkbox formControlName="isVerified">Verified</mat-checkbox>
+                    <p *ngIf="user.id"><span>Registration date:</span> <i>{{user.settings.registrationDate | date:"dd MMMM, yyyy 'at' HH:mm" }}</i></p> 
+                    <p *ngIf="user.id"><span>Last joined date:</span> <i>{{user.settings.joinedDate | date:"dd MMMM, yyyy 'at' HH:mm" }}</i> </p>     
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+    <div mat-dialog-actions style="box-sizing: border-box">
+        <div fxLayout="row" fxLayoutAlign="end center" class="w-100">
+            <button mat-raised-button color="primary"  type="submit" ><span *ngIf="!user.id">Save</span><span *ngIf="user.id">Update</span></button>
+            <button mat-raised-button color="warn" (click)="close()">Cancel</button>
+        </div> 
+    </div>
+</form>

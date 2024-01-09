@@ -21,7 +21,7 @@ export const routes = [
       { path: 'menu-items', loadChildren: () => import('./menu-items/menu-items.module').then(m => m.MenuItemsModule),canActivate: [AuthGuard], data: { roles: [1,3] } },
       { path: 'stock', loadChildren: () => import('./inventory/inventory.module').then(m => m.InventoryModule),canActivate: [AuthGuard], data: { roles: [1,3,5,8] } },
       { path: 'sales', loadChildren: () => import('./sales/sales.module').then(m => m.SalesModule),canActivate: [AuthGuard], data: { roles: [1,3] } },
-      { path: 'users', loadChildren: () => import('./users/users.module').then(m => m.UsersModule),canActivate: [AuthGuard], data: { roles: [1,3,5],breadcrumb: 'Users' } },
+      { path: 'chefs', loadChildren: () => import('./chefs/chef.module').then(m => m.ChefModule),canActivate: [AuthGuard], data: { roles: [1,3,5],breadcrumb: 'Chefs' } },
       { path: 'riders', loadChildren: () => import('./riders/riders.module').then(m => m.RidersModule),canActivate: [AuthGuard], data: { roles: [1,3,5],breadcrumb: 'Riders' } },
       { path: 'cuisines', loadChildren: () => import('./cuisines/cuisines.module').then(m => m.CuisinesModule),canActivate: [AuthGuard], data: { roles: [1,3,5],breadcrumb: 'Cuisines' } },
       { path: 'ingredients', loadChildren: () => import('./ingredients/ingredients.module').then(m => m.IngredientsModule),canActivate: [AuthGuard], data: { roles: [1,3,5],breadcrumb: 'Ingredients' } },
@@ -47,7 +47,7 @@ export const routes = [
     FullScreenComponent,
     MessagesComponent,
     BreadcrumbComponent,
-    ProfileDialogComponent
+    ProfileDialogComponent,
   ],
   imports: [
     CommonModule,

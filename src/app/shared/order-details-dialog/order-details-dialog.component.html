@@ -1,6 +1,6 @@
 <div class="header bg-primary">
     <div fxLayout="row wrap" fxLayoutAlign="space-between center">
-        <h2 class="fw-500 secondary-font">Order #{{order.chef_order_id}}</h2>
+        <h2 class="fw-500 secondary-font">#{{order.order_id}}</h2>
         <app-dialog-header-controls [dialogRef]="dialogRef"></app-dialog-header-controls> 
     </div>   
 </div> 
@@ -97,7 +97,7 @@
                 <div class="card-body" fxFlex="100">
                     <div fxLayout="row" fxFlex="100" class="steps d-flex flex-wrap flex-sm-nowrap justify-content-between padding-top-2x padding-bottom-1x">
                         <div *ngFor="let status of statuses"  [ngClass]="checkStatus(status.id) ? 'step completed' : 'step'"  >
-                            <div class="step-icon-wrap">
+                            <div class="step-icon-wrap" >
                               <div class="step-icon"><mat-icon>{{status.icon}}</mat-icon></div>
                             </div>
                             <h4 class="step-title">{{status.name}}</h4>

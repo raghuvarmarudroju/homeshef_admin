@@ -15,7 +15,7 @@ import { MatSlideToggleChange } from '@angular/material/slide-toggle';
   providers: [ UsersService ]  
 })
 export class UsersComponent implements OnInit {
-    public users: any;
+    public users: any =[];
     public searchText: string = '';
     public page:any;
     public settings: Settings;
@@ -33,7 +33,7 @@ export class UsersComponent implements OnInit {
     }
 
     public getUsers() {
-        this.users = []; //for show spinner each time
+        //this.users = []; //for show spinner each time
         const params ={
             role : 3
         }

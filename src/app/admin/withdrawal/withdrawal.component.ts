@@ -94,7 +94,7 @@ export class WithdrawalComponent implements OnInit {
   }
   onCommunitySelectionChange(event:any){ 
     console.log(event); 
-    this.communityChefs = this.chefs.filter((item:any) => item.community_id == event);
+    this.communityChefs = this.chefs.filter((item:any) => item.community_id == event );
   }
 
   public updateWithdrawls(){
